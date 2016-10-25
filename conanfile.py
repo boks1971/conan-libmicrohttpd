@@ -19,7 +19,7 @@ class LibmicrohttpdConan(ConanFile):
                "disable_epoll": [True, False]}
     url = "http://github.com/DEGoodmanWilson/conan-libmicrohttpd"
     #TODO disable_https should be False in the future
-    default_options = "shared=False", "disable_https=True", "disable_messages=False", \
+    default_options = "shared=False", "disable_https=False", "disable_messages=False", \
                       "disable_postprocessor=False", "disable_dauth=False", "disable_epoll=False"
 
     def source(self):
@@ -33,10 +33,8 @@ class LibmicrohttpdConan(ConanFile):
         del self.settings.compiler.libcxx
 
         if not self.options["disable-https"]:
-            pass
-            # for the moment these do not exist
-            # self.requires.add("gcrypt/1.7.3@DEGoodmanWilson/stable", private=False)
-            # self.requires.add("gnutls/3.5@DEGoodmanWilson/stable", private=False)
+            self.requires.add("gcrypt/1.7.3@DEGoodmanWilson/testing", private=False)
+            self.requires.add("gnutls/3.5@DEGoodmanWilson/testing", private=False)
 
     def generic_env_configure_vars(self, verbose=False):
         """Reusable in any lib with configure!!"""
