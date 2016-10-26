@@ -32,7 +32,7 @@ class LibmicrohttpdConan(ConanFile):
     def config(self):
         del self.settings.compiler.libcxx
 
-        if not self.options["disable-https"]:
+        if not self.options["disable_https"]:
             self.requires.add("gcrypt/1.7.3@DEGoodmanWilson/testing", private=False)
             self.requires.add("gnutls/3.5@DEGoodmanWilson/testing", private=False)
 
